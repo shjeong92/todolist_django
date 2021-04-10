@@ -7,17 +7,22 @@
     </h1>
     <form method="post" action="#">       
         {% csrf_token %} 
-        <ul>
-            {% for item in ls.item_set.all %}
+        {% for item in ls.item_set.all %}
+        <div class ="input-group mb-3">
+            <div class="input-group-text">
                 {% if item.complete == True %}
-                    <li><input type="checkbox", value="clicked", name="c{{item.id}}" checked>{{item.text}}</li>
+                    <input type="checkbox", value="clicked", name="c{{item.id}}" checked>
                 {% else %}
-                    <li><input type="checkbox", value="clicked", name="c{{item.id}}">{{item.text}}</li>
+                    <input type="checkbox", value="clicked", name="c{{item.id}}">
                 {% endif %}
-            {% endfor %}
-        </ul>
-        <button type ="submit", name="save", value="save">Save</button>
-        <input type="text", name="new">
-        <button type ="submit", name="newItem", value="newItem">Add Item</button>
+            </div>
+            <input type="text", value="{{item.text}}" class="form-control"> 
+        </div>
+        {% endfor %}
+        <div class="input-group mb-3">
+            <button class="btn btn-success"type ="submit", name="newItem", value="newItem">Add Item</button>
+            <input type="text", name="new">
+        </div>
+        <button class="btn btn-success" type ="submit", name="save", value="save">Save</button>
     </form>
 {% endblock %}
